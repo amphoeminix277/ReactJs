@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recetas</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+    <script type="text/babel">
+      //   let h1Element = React.createElement(
+      //     "h1",
+      //     { id: "test", key: "carne" },
+      //     "Carne asada"
+      //   );
+      //   let h2Element = React.createElement(
+      //     "h2",
+      //     { id: "test2", key: "pollo" },
+      //     "Pollo asado"
+      //   );
+      //   ReactDOM.render([h1Element, h2Element], document.getElementById("root"));
+​
+      // let elements = React.createElement("section",{id:"receta"},
+      //     React.createElement("h1",null,"Croquetas"),
+      //     React.createElement("ul",{className:"Ingredientes"},
+      //         React.createElement("li",null,"Huevos"),
+      //         React.createElement("li",null,"Queso"),
+      //         React.createElement("li",null,"Harina"),
+      //         React.createElement("li",null,"Leche"),
+      //         React.createElement("li",null,"Sal"),
+      //         React.createElement("li",null,"Azucar"),
+      //         React.createElement("li",null,"Verduras varias"),
+      //         React.createElement("li",null,"Chocomilk para la sed")
+      //     ),
+      //     React.createElement("section",{className:"Instrucciones"},
+      //         React.createElement("h2",null,"Como preparar unas roquetas con ChocoMilk"),
+      //         React.createElement("p",null,"Picamos bien el jamón ibérico para que quede en taquitos muy pequeños. Ponemos en la sartén la mantequilla y la harina y en cuanto se funde la primera, removemos y agregamos la mitad del jamón, para que este quede envuelto en esa masa o roux.")
+      //     )
+      // );
+      // const arrayIngredientes = ["Huevos","Queso","Harina","Leche","Sal","Azucar","Verduras"];
+      // let elements = React.createElement("section",{id:"receta"},
+      //     React.createElement("h1",null,"Croquetas"),
+      //     React.createElement("ul",{className:"Ingredientes"},
+      //         arrayIngredientes.map((ingrediente,i) => React.createElement("li",{key:i},ingrediente))
+      //     ),
+      //     React.createElement("section",{className:"Instrucciones"},
+      //         React.createElement("h2",null,"Como preparar unas roquetas con ChocoMilk"),
+      //         React.createElement("p",null,"Picamos bien el jamón ibérico para que quede en taquitos muy pequeños. Ponemos en la sartén la mantequilla y la harina y en cuanto se funde la primera, removemos y agregamos la mitad del jamón, para que este quede envuelto en esa masa o roux.")
+      //     )
+      // );
+      // console.log(elements)
+      // ReactDOM.render(elements, document.getElementById("root"))
+​
+      // crear componete antiguo
+      // const ingredientList = React.createClass({
+      //   displayName: "Lista de ingredientes",
+      //   render(){
+      //     return React.createElement(
+      //       "ul",
+      //       {className: ingredientes},
+      //       React.createElement("li", {key: 1}, "Test")
+      //     );
+      //   }
+      //   }
+      // );
+​
+      //crear componente - Evolución de la forma antigua
+      // class ListaIngredientes extends React.Component{
+      //   render(){
+      //     return React.createElement(
+      //       "ul",
+      //       {className: ingredientes},
+      //       React.createElement("li", {key: 1}, "Test")
+      //     );
+      //   }
+      // };
+​
+      //crear componente - forma actual
+      // function ListaIngredientes(){
+      //   return React.createElement(
+      //     "ul",
+      //     {className: ingredientes},
+      //     React.createElement("li", {key: 1}, "Test")
+      //   )
+      // };
+​
+      //JSX
+      // function ListaIngredientes(){
+      //   return(
+      //     <div>
+      //       <ul>
+      //         <li> Prueba </li>
+      //       </ul>
+      //     </div>);
+      // };
+      //ReactDom.render(<ListaIngredientes />, document.getElementById("root"));
+​
+      const data = [
+        {
+          name: "Baked Salmon",
+          ingredients: [
+            { name: "Salmon", amount: 1, measurement: "l lb" },
+            { name: "Pine Nuts", amount: 1, measurement: "cup" },
+            { name: "Butter Lettuce", amount: 2, measurement: "cups" },
+            { name: "Yellow Squash", amount: 1, measurement: "med" },
+            { name: "Olive Oil", amount: 0.5, measurement: "cup" },
+            { name: "Garlic", amount: 3, measurement: "cloves" },
+          ],
+          steps: [
+            "Preheat the oven to 350 degrees.",
+            "Spread the olive oil around a glass baking dish.",
+            "Add the yellow squash and place in the oven for 30 mins.",
+            "Add the salmon, garlic, and pine nuts to the dish.",
+            "Bake for 15 minutes.",
+            "Remove from oven. Add the lettuce and serve.",
+          ],
+        },
+        {
+          name: "Fish Tacos",
+          ingredients: [
+            { name: "Whitefish", amount: 1, measurement: "l lb" },
+            { name: "Cheese", amount: 1, measurement: "cup" },
+            { name: "Iceberg Lettuce", amount: 2, measurement: "cups" },
+            { name: "Tomatoes", amount: 2, measurement: "large" },
+            { name: "Tortillas", amount: 3, measurement: "med" },
+          ],
+          steps: [
+            "Cook the fish on the grill until hot.",
+            "Place the fish on the 3 tortillas.",
+            "Top them with lettuce, tomatoes, and cheese.",
+          ],
+        },
+      ];
+​
+      function Menu(props){
+        return(
+          <article>
+            <header><h1>{props.titulo}</h1></header>
+            <div className="recetas"> 
+              {props.recetas.map((receta, i) => 
+                <Recetas 
+                  key={i}
+                  {...receta}
+                />
+                )}
+            </div>
+          </article>
+        )
+      };
+​
+      function Recetas(props){
+        return(
+          <section>
+            <h1>{props.name}</h1>
+            <ul className="Ingredientes">
+              {props.ingredients.map((ingrediente, i) =>
+                <li key={i}>{ingrediente.name}</li>
+                )}  
+            </ul>
+            <section> 
+              <h2>Instrucciones</h2>
+              {props.steps.map((paso, i) => 
+                <p key={i}>{paso}</p>
+                )}
+            </section>
+          </section>
+        )
+      };
+​
+      ReactDOM.render(<Menu recetas={data} titulo="Deliciosas recetas"/>, document.getElementById("root"));
+    </script>
+  </body>
+</html>
