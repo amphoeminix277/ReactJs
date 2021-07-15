@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ColorProvider from './ColorProvider';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <ColorProvider>
     <App />
-  </React.StrictMode>,
+  </ColorProvider>,
   document.getElementById('root')
 );
 
