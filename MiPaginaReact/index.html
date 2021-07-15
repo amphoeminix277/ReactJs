@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Uchen&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Strength Things</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/javascript" src="assets/js/data.js"></script>
+    <script type="text/babel">
+      function Header(props) {
+        return (
+          <article>
+            <nav className="navbar navbar-light">
+              <div className="container">
+                <a className="navbar-brand text-center" href="#">
+                  <img className="img-logo"  src="assets/imgs/Logostranger.png" alt="logo" />
+                  <h2 className="fst-italic">{props.titlePage}</h2>
+                </a>
+              </div>
+            </nav>
+            <div className="row justify-content-center text-center">
+              <h1 className="m-2">{props.titleList}</h1>
+              {props.series.map((serie, i) => (
+                <List key={i} index={i} {...serie} />
+              ))}
+            </div>
+          </article>
+        );
+      }
+
+      function List(props) {
+        return (
+          <div className="card m-3 bg-dark" style={{ width: "11rem" }}>
+            <img
+              src={props.imgUrl}
+              alt={props.name}
+              style={{ height: "14rem" }}
+            />
+            <div className="card-body text-center">
+              <h5 className="card-title text-light">{props.name}</h5>
+              <div className="col-lg-12">
+                <button
+                  className="btn btn-warning btn-sm"
+                  data-bs-toggle="modal"
+                  data-bs-target={"#detailSeries" + props.index}
+                >
+                  Detalle
+                </button>
+                <Modal key={props.index} index={props.index} {...props} />
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function Modal(props) {
+        return (
+          <div className="modal fade" tabIndex="-1" id={"detailSeries" + props.index}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header bg-warning">
+                  <h5 className="modal-title text-light">{props.name}</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body bg-secondary">
+                  <div className="row">
+                    <div className="col-lg-6">
+                    <img
+                      src={props.imgUrl}
+                      alt={props.name}
+                      style={{ height: "10rem" }}
+                    />
+                    </div>
+                    <div className="col-lg-6">
+                      <p className="text-light">{props.description}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal-footer bg-dark">
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-warning">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(
+        <Header
+          series={data}
+          titlePage="SuperSerie"
+          titleList="Personajes Strength Things"
+        />,
+        document.getElementById("root")
+      );
+    </script>
+  </body>
+</html>

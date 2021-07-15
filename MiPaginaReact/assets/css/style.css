@@ -1,0 +1,31 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    font-family: 'Uchen', serif;
+    color: rgb(151, 61, 61);
+}
+
+h5 {
+    font-family: 'Uchen', serif;
+    font-size: 15px;
+}
+
+p {
+    text-align: justify;
+    font-family: cursive;
+    font-size: 11px;
+}
+
+.card {
+    padding-left: unset;
+    padding-right: unset;
+}
+
+.img-logo{
+    width: 50%;
+    margin-left: 120px;
+    
+}
+
